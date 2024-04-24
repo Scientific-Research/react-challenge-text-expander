@@ -75,7 +75,7 @@ const TextExpander: React.FC<ITextExpander> = ({
   // const [collapsed, setCollapsed] = useState(false);
 
   const toggleExpansion = () => {
-    setExpanded(() => !expanded);
+    setExpanded((exp) => !exp);
   };
   console.log(expanded);
 
