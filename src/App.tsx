@@ -15,9 +15,9 @@ export default function App() {
   return (
     <div>
       <TextExpander
-        collapsedNumWords={0}
-        expandButtonText={""}
-        collapseButtonText={""}
+        collapsedNumWords={10}
+        expandButtonText={"Show more"}
+        collapseButtonText={"Show less"}
         buttonColor={""}
         expanded={false}
         className={""}
@@ -45,12 +45,12 @@ export default function App() {
       </TextExpander>
 
       <TextExpander
+        collapsedNumWords={10}
+        expandButtonText={"Show more"}
+        collapseButtonText={"Show less"}
+        buttonColor={""}
         expanded={true}
         className="box"
-        collapsedNumWords={0}
-        expandButtonText={""}
-        collapseButtonText={""}
-        buttonColor={""}
       >
         Space missions have given us incredible insights into our universe and
         have inspired future generations to keep reaching for the stars. Space
