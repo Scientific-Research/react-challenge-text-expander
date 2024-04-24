@@ -18,7 +18,7 @@ export default function App() {
         collapsedNumWords={10}
         expandButtonText={"Show more"}
         collapseButtonText={"Show less"}
-        buttonColor={""}
+        buttonColor={"blue"}
         expanded={false}
         className={""}
       >
@@ -48,7 +48,7 @@ export default function App() {
         collapsedNumWords={10}
         expandButtonText={"Show more"}
         collapseButtonText={"Show less"}
-        buttonColor={""}
+        buttonColor={"blue"}
         expanded={true}
         className="box"
       >
