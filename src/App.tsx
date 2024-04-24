@@ -87,7 +87,11 @@ const TextExpander: React.FC<ITextExpander> = ({
       return (
         <div className={className}>
           {children} {""}
-          <a href="" style={{ color: buttonColor, textDecoration: "none" }}>
+          <a
+            href="#"
+            style={{ color: buttonColor, textDecoration: "none" }}
+            onClick={toggleExpansion}
+          >
             {collapseButtonText}
           </a>
         </div>
