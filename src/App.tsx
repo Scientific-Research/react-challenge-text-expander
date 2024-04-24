@@ -7,7 +7,7 @@ interface ITextExpander {
   expandButtonText: string;
   collapseButtonText: string;
   buttonColor: string;
-  expanded: boolean;
+  expandedS: boolean;
   className: string;
 }
 
@@ -19,7 +19,7 @@ export default function App() {
         expandButtonText={"Show more"}
         collapseButtonText={"Show less"}
         buttonColor={"blue"}
-        expanded={false}
+        expandedS={false}
         className={""}
       >
         Space travel is the ultimate adventure! Imagine soaring past the stars
@@ -34,7 +34,7 @@ export default function App() {
         expandButtonText="Show text"
         collapseButtonText="Collapse text"
         buttonColor="#ff6622"
-        expanded={false}
+        expandedS={false}
         className={""}
       >
         Space travel requires some seriously amazing technology and
@@ -49,7 +49,7 @@ export default function App() {
         expandButtonText={"Show more"}
         collapseButtonText={"Show less"}
         buttonColor={"blue"}
-        expanded={true}
+        expandedS={true}
         className="box"
       >
         Space missions have given us incredible insights into our universe and
@@ -67,21 +67,31 @@ const TextExpander: React.FC<ITextExpander> = ({
   expandButtonText,
   collapseButtonText,
   buttonColor,
+  expandedS,
 }) => {
-  const [expanded, setExpanded] = useState(false);
+  // const [expanded, setExpanded] = useState(false);
+  const [expanded, setExpanded] = useState(expandedS);
+  // const [collapsed, setCollapsed] = useState(false);
 
   const toggleExpansion = () => {
     setExpanded(!expanded);
   };
 
+  const words = (children as string).split(" ");
+  const truncatedText = words.slice(0, collapsedNumWords).join(" ") + "...";
+
   const renderContent = () => {
     if (expanded) {
-      return children;
+      return (
+        <>
+          {children} {""}
+          <a href="" style={{ color: buttonColor, textDecoration: "none" }}>
+            {collapseButtonText}
+          </a>
+        </>
+      );
     } else {
       // split the text into words and display only the first 'collapsedNumWords'
-      const words = (children as string).split(" ");
-      const truncatedText = words.slice(0, collapsedNumWords).join(" ") + "...";
-
       return (
         <>
           {/* {children} */}
