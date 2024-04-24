@@ -68,14 +68,16 @@ const TextExpander: React.FC<ITextExpander> = ({
   collapseButtonText,
   buttonColor,
   expandedS,
+  className,
 }) => {
   // const [expanded, setExpanded] = useState(false);
   const [expanded, setExpanded] = useState(expandedS);
   // const [collapsed, setCollapsed] = useState(false);
 
   const toggleExpansion = () => {
-    setExpanded(!expanded);
+    setExpanded(() => !expanded);
   };
+  console.log(expanded);
 
   const words = (children as string).split(" ");
   const truncatedText = words.slice(0, collapsedNumWords).join(" ") + "...";
@@ -83,17 +85,17 @@ const TextExpander: React.FC<ITextExpander> = ({
   const renderContent = () => {
     if (expanded) {
       return (
-        <>
+        <div className={className}>
           {children} {""}
           <a href="" style={{ color: buttonColor, textDecoration: "none" }}>
             {collapseButtonText}
           </a>
-        </>
+        </div>
       );
     } else {
       // split the text into words and display only the first 'collapsedNumWords'
       return (
-        <>
+        <div className={className}>
           {/* {children} */}
           {truncatedText}{" "}
           <a
@@ -105,7 +107,7 @@ const TextExpander: React.FC<ITextExpander> = ({
           </a>
           <br />
           <br />
-        </>
+        </div>
       );
     }
   };
