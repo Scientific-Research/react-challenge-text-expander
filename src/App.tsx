@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "./index.css";
 
 interface ITextExpander {
@@ -67,11 +68,36 @@ const TextExpander: React.FC<ITextExpander> = ({
   collapseButtonText,
   buttonColor,
 }) => {
-  return (
-    <div>
-      {children}
-      <br />
-      <br />
-    </div>
-  );
+  const [expanded, setExpanded] = useState(false);
+
+  const toggleExpansion = () => {
+    setExpanded(!expanded);
+  };
+
+  const renderContent = () => {
+    if (expanded) {
+      return children;
+    } else {
+      // split the text into words and display only the first 'collapsedNumWords'
+      const words = (children as string).split(" ");
+      const truncatedText = words.slice(0, collapsedNumWords).join(" ") + "...";
+
+      return (
+        <>
+          {/* {children} */}
+          {truncatedText}{" "}
+          <a
+            href="#"
+            onClick={toggleExpansion}
+            style={{ color: buttonColor, textDecoration: "none" }}
+          >
+            {expandButtonText}
+          </a>
+          <br />
+          <br />
+        </>
+      );
+    }
+  };
+  return <div>{renderContent()}</div>;
 };
