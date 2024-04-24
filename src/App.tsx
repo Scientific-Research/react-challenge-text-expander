@@ -1,9 +1,26 @@
 import "./index.css";
 
+interface ITextExpander {
+  children: React.ReactNode; // define the Children prop
+  collapsedNumWords: number;
+  expandButtonText: string;
+  collapseButtonText: string;
+  buttonColor: string;
+  expanded: boolean;
+  className: string;
+}
+
 export default function App() {
   return (
     <div>
-      <TextExpander>
+      <TextExpander
+        collapsedNumWords={0}
+        expandButtonText={""}
+        collapseButtonText={""}
+        buttonColor={""}
+        expanded={false}
+        className={""}
+      >
         Space travel is the ultimate adventure! Imagine soaring past the stars
         and exploring new worlds. It's the stuff of dreams and science fiction,
         but believe it or not, space travel is a real thing. Humans and robots
@@ -16,6 +33,8 @@ export default function App() {
         expandButtonText="Show text"
         collapseButtonText="Collapse text"
         buttonColor="#ff6622"
+        expanded={false}
+        className={""}
       >
         Space travel requires some seriously amazing technology and
         collaboration between countries, private companies, and international
@@ -24,7 +43,14 @@ export default function App() {
         foot on the moon or when rovers were sent to roam around on Mars.
       </TextExpander>
 
-      <TextExpander expanded={true} className="box">
+      <TextExpander
+        expanded={true}
+        className="box"
+        collapsedNumWords={0}
+        expandButtonText={""}
+        collapseButtonText={""}
+        buttonColor={""}
+      >
         Space missions have given us incredible insights into our universe and
         have inspired future generations to keep reaching for the stars. Space
         travel is a pretty cool thing to think about. Who knows what we'll
@@ -34,6 +60,18 @@ export default function App() {
   );
 }
 
-const TextExpander = () => {
-  return <div>TODO</div>;
+const TextExpander: React.FC<ITextExpander> = ({
+  children,
+  collapsedNumWords,
+  expandButtonText,
+  collapseButtonText,
+  buttonColor,
+}) => {
+  return (
+    <div>
+      {children}
+      <br />
+      <br />
+    </div>
+  );
 };
