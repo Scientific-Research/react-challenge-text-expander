@@ -61,6 +61,7 @@ export default function App() {
   );
 }
 
+// NOTE: FIRST METHOD:
 const TextExpander: React.FC<ITextExpander> = ({
   children,
   collapsedNumWords,
@@ -71,49 +72,112 @@ const TextExpander: React.FC<ITextExpander> = ({
   className,
 }) => {
   // const [expanded, setExpanded] = useState(false);
-  const [expanded, setExpanded] = useState(expandedS);
+  const [expanded, setExpanded] = useState(expandedS); // expandedS is default value
   // const [collapsed, setCollapsed] = useState(false);
 
+  // To toggle the exapnded with false and true!
   const toggleExpansion = () => {
     setExpanded((exp) => !exp);
   };
-  console.log(expanded);
 
-  const words = (children as string).split(" ");
-  const truncatedText = words.slice(0, collapsedNumWords).join(" ") + "...";
-
-  const renderContent = () => {
-    if (expanded) {
-      return (
-        <div className={className}>
-          {children} {""}
-          <a
-            href="#"
-            style={{ color: buttonColor, textDecoration: "none" }}
-            onClick={toggleExpansion}
-          >
-            {collapseButtonText}
-          </a>
-        </div>
-      );
-    } else {
-      // split the text into words and display only the first 'collapsedNumWords'
-      return (
-        <div className={className}>
-          {/* {children} */}
-          {truncatedText}{" "}
-          <a
-            href="#"
-            onClick={toggleExpansion}
-            style={{ color: buttonColor, textDecoration: "none" }}
-          >
-            {expandButtonText}
-          </a>
-          <br />
-          <br />
-        </div>
-      );
-    }
+  // CSS Style
+  const buttonStyle = {
+    background: "none",
+    border: "none",
+    font: "inherit",
+    cursor: "pointer",
+    marginLeft: "6px",
+    color: buttonColor,
   };
-  return <div>{renderContent()}</div>;
+
+  const words = (children as string).split(" "); // NOTE: it separates all the words in a sentence with a comma! ['Space', 'travel', 'is',...] => in this case, we can count the words using slice command!
+
+  // split the text into words and display only the first 'collapsedNumWords'
+  const truncatedText = words.slice(0, collapsedNumWords).join(" ") + "..."; // NOTE: slice cut the sentence from first word untill the number of collapsedNumWords(for example 10 words, 20 words, ...), after using slice, we have to use join(" ") again to remove the commas between words which split(" ") already did, otherwise, we will see the sentences with comma between words which is not acceptable!
+
+  // NOTE: shows us the entire paragraph => children or only a section of that => truncatedText, it dependes on the state of expanded state variable, whether it is true or false!
+  const displayText = expanded ? children : truncatedText;
+
+  return (
+    <div className={className}>
+      {/* {children} */}
+      {displayText}{" "}
+      {/* <a
+        href="#"
+        onClick={toggleExpansion}
+        // style={{ color: buttonColor, textDecoration: "none" }}
+        style={buttonStyle}
+      >
+        {expanded ? collapseButtonText : expandButtonText}
+      </a> */}
+      {/* NOTE: Instead of link => a href, we use a button but with above CSS styles => buttonStyle => with this styles, the button will look like a link and not button anymore!   */}
+      <button
+        onClick={toggleExpansion}
+        // style={{ color: buttonColor, textDecoration: "none" }}
+        style={buttonStyle}
+      >
+        {expanded ? collapseButtonText : expandButtonText}
+      </button>
+      <br />
+      <br />
+    </div>
+  );
 };
+
+// NOTE: SECOND METHOD:
+// const TextExpander: React.FC<ITextExpander> = ({
+//   children,
+//   collapsedNumWords,
+//   expandButtonText,
+//   collapseButtonText,
+//   buttonColor,
+//   expandedS,
+//   className,
+// }) => {
+//   // const [expanded, setExpanded] = useState(false);
+//   const [expanded, setExpanded] = useState(expandedS);
+//   // const [collapsed, setCollapsed] = useState(false);
+
+//   const toggleExpansion = () => {
+//     setExpanded((exp) => !exp);
+//   };
+//   console.log(expanded);
+
+//   const words = (children as string).split(" ");
+//   const truncatedText = words.slice(0, collapsedNumWords).join(" ") + "...";
+
+//   const renderContent = () => {
+//     if (expanded) {
+//       return (
+//         <div className={className}>
+//           {children} {""}
+//           <a
+//             href="#"
+//             style={{ color: buttonColor, textDecoration: "none" }}
+//             onClick={toggleExpansion}
+//           >
+//             {collapseButtonText}
+//           </a>
+//         </div>
+//       );
+//     } else {
+//       // split the text into words and display only the first 'collapsedNumWords'
+//       return (
+//         <div className={className}>
+//           {/* {children} */}
+//           {truncatedText}{" "}
+//           <a
+//             href="#"
+//             onClick={toggleExpansion}
+//             style={{ color: buttonColor, textDecoration: "none" }}
+//           >
+//             {expandButtonText}
+//           </a>
+//           <br />
+//           <br />
+//         </div>
+//       );
+//     }
+//   };
+//   return <div>{renderContent()}</div>;
+// };
